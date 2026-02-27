@@ -1,8 +1,10 @@
-
 #include <iostream>
 #include <vector>
 #include <iomanip>
+#include <fstream>
 using namespace std;
+
+const string FILE_NAME = "appliances.txt";
 
 class Appliance {
 private:
@@ -16,6 +18,10 @@ public:
         powerRating = p;
         usageHours = u;
     }
+
+    string getName() { return name; }
+    float getPower() { return powerRating; }
+    float getHours() { return usageHours; }
 
     float calculateEnergy() {
         return (powerRating * usageHours) / 1000.0;
@@ -32,13 +38,16 @@ public:
 vector<Appliance> appliances;
 
 void registerAppliance() {
+
     string name;
     float power, hours;
 
     cout << "Enter appliance name: ";
     cin >> name;
+
     cout << "Enter power rating (W): ";
     cin >> power;
+
     cout << "Enter usage hours/day: ";
     cin >> hours;
 
@@ -87,6 +96,20 @@ void calculateBilling() {
     cout << "Total Cost: " << cost << endl;
 }
 
+// 🔹 NEW: Save appliances to file
+void saveAppliances() {
+
+    ofstream file(FILE_NAME);
+
+    for (Appliance a : appliances) {
+        file << a.getName() << " "
+             << a.getPower() << " "
+             << a.getHours() << endl;
+    }
+
+    file.close();
+}
+
 int main() {
 
     int choice;
@@ -116,6 +139,8 @@ int main() {
             calculateBilling();
             break;
         case 5:
+            saveAppliances();   // 🔹 Save before exit
+            cout << "Data saved successfully.\n";
             cout << "Goodbye\n";
             break;
         default:
