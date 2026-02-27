@@ -16,41 +16,70 @@ public:
     }
 
     void display() {
-        cout << "\nName: " << name
+        cout << "Name: " << name
              << " | Power: " << powerRating
              << "W | Hours: " << usageHours << endl;
     }
 };
 
-int main() {
+vector<Appliance> appliances;
 
-    vector<Appliance> appliances;
+void registerAppliance() {
 
-    int n;
-    cout << "How many appliances? ";
-    cin >> n;
+    string name;
+    float power, hours;
 
-    for (int i = 0; i < n; i++) {
+    cout << "Enter appliance name: ";
+    cin >> name;
 
-        string name;
-        float power, hours;
+    cout << "Enter power rating (W): ";
+    cin >> power;
 
-        cout << "\nEnter appliance name: ";
-        cin >> name;
+    cout << "Enter usage hours/day: ";
+    cin >> hours;
 
-        cout << "Enter power rating (W): ";
-        cin >> power;
+    appliances.push_back(Appliance(name, power, hours));
 
-        cout << "Enter usage hours/day: ";
-        cin >> hours;
+    cout << "Appliance added successfully.\n";
+}
 
-        appliances.push_back(Appliance(name, power, hours));
+void viewAppliances() {
+
+    if (appliances.empty()) {
+        cout << "No appliances available.\n";
+        return;
     }
-
-    cout << "\n--- Appliance List ---\n";
 
     for (Appliance a : appliances)
         a.display();
+}
+
+int main() {
+
+    int choice;
+
+    do {
+        cout << "\n1. Register Appliance\n";
+        cout << "2. View Appliances\n";
+        cout << "3. Exit\n";
+        cout << "Choice: ";
+        cin >> choice;
+
+        switch (choice) {
+        case 1:
+            registerAppliance();
+            break;
+        case 2:
+            viewAppliances();
+            break;
+        case 3:
+            cout << "Goodbye\n";
+            break;
+        default:
+            cout << "Invalid choice\n";
+        }
+
+    } while (choice != 3);
 
     return 0;
 }
