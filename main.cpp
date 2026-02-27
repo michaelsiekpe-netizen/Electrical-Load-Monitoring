@@ -1,5 +1,5 @@
-
 #include <iostream>
+#include <vector>
 using namespace std;
 
 class Appliance {
@@ -16,29 +16,41 @@ public:
     }
 
     void display() {
-        cout << "\nAppliance Details\n";
-        cout << "Name: " << name << endl;
-        cout << "Power (W): " << powerRating << endl;
-        cout << "Hours/Day: " << usageHours << endl;
+        cout << "\nName: " << name
+             << " | Power: " << powerRating
+             << "W | Hours: " << usageHours << endl;
     }
 };
 
 int main() {
 
-    string name;
-    float power, hours;
+    vector<Appliance> appliances;
 
-    cout << "Enter appliance name: ";
-    cin >> name;
+    int n;
+    cout << "How many appliances? ";
+    cin >> n;
 
-    cout << "Enter power rating (W): ";
-    cin >> power;
+    for (int i = 0; i < n; i++) {
 
-    cout << "Enter usage hours per day: ";
-    cin >> hours;
+        string name;
+        float power, hours;
 
-    Appliance a1(name, power, hours);
-    a1.display();
+        cout << "\nEnter appliance name: ";
+        cin >> name;
+
+        cout << "Enter power rating (W): ";
+        cin >> power;
+
+        cout << "Enter usage hours/day: ";
+        cin >> hours;
+
+        appliances.push_back(Appliance(name, power, hours));
+    }
+
+    cout << "\n--- Appliance List ---\n";
+
+    for (Appliance a : appliances)
+        a.display();
 
     return 0;
 }
