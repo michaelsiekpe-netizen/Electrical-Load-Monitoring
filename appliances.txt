@@ -1,0 +1,2 @@
+BULB 30 13
+Television 150 6
