@@ -1,5 +1,7 @@
+
 #include <iostream>
 #include <vector>
+#include <iomanip>
 using namespace std;
 
 class Appliance {
@@ -15,10 +17,15 @@ public:
         usageHours = u;
     }
 
+    float calculateEnergy() {
+        return (powerRating * usageHours) / 1000.0;
+    }
+
     void display() {
-        cout << "Name: " << name
-             << " | Power: " << powerRating
-             << "W | Hours: " << usageHours << endl;
+        cout << left << setw(15) << name
+             << setw(12) << powerRating
+             << setw(12) << usageHours
+             << setw(12) << calculateEnergy() << endl;
     }
 };
 
@@ -39,8 +46,6 @@ void registerAppliance() {
     cin >> hours;
 
     appliances.push_back(Appliance(name, power, hours));
-
-    cout << "Appliance added successfully.\n";
 }
 
 void viewAppliances() {
@@ -49,6 +54,11 @@ void viewAppliances() {
         cout << "No appliances available.\n";
         return;
     }
+
+    cout << left << setw(15) << "Name"
+         << setw(12) << "Power(W)"
+         << setw(12) << "Hours"
+         << setw(12) << "Energy(kWh)" << endl;
 
     for (Appliance a : appliances)
         a.display();
