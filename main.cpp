@@ -1,4 +1,3 @@
-
 #include <iostream>
 #include <vector>
 #include <iomanip>
@@ -32,16 +31,13 @@ public:
 vector<Appliance> appliances;
 
 void registerAppliance() {
-
     string name;
     float power, hours;
 
     cout << "Enter appliance name: ";
     cin >> name;
-
     cout << "Enter power rating (W): ";
     cin >> power;
-
     cout << "Enter usage hours/day: ";
     cin >> hours;
 
@@ -64,6 +60,16 @@ void viewAppliances() {
         a.display();
 }
 
+float calculateTotalEnergy() {
+
+    float total = 0;
+
+    for (Appliance a : appliances)
+        total += a.calculateEnergy();
+
+    return total;
+}
+
 int main() {
 
     int choice;
@@ -71,7 +77,8 @@ int main() {
     do {
         cout << "\n1. Register Appliance\n";
         cout << "2. View Appliances\n";
-        cout << "3. Exit\n";
+        cout << "3. Calculate Total Energy\n";
+        cout << "4. Exit\n";
         cout << "Choice: ";
         cin >> choice;
 
@@ -83,13 +90,18 @@ int main() {
             viewAppliances();
             break;
         case 3:
+            cout << "Total Energy: "
+                 << calculateTotalEnergy()
+                 << " kWh\n";
+            break;
+        case 4:
             cout << "Goodbye\n";
             break;
         default:
             cout << "Invalid choice\n";
         }
 
-    } while (choice != 3);
+    } while (choice != 4);
 
     return 0;
 }
