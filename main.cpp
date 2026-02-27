@@ -1,3 +1,4 @@
+
 #include <iostream>
 #include <vector>
 #include <iomanip>
@@ -70,6 +71,22 @@ float calculateTotalEnergy() {
     return total;
 }
 
+void calculateBilling() {
+
+    float tariff;
+
+    cout << "Enter tariff per kWh: ";
+    cin >> tariff;
+
+    float totalEnergy = calculateTotalEnergy();
+    float cost = totalEnergy * tariff;
+
+    cout << "\n--- Billing Summary ---\n";
+    cout << "Total Energy: " << totalEnergy << " kWh\n";
+    cout << "Tariff: " << tariff << endl;
+    cout << "Total Cost: " << cost << endl;
+}
+
 int main() {
 
     int choice;
@@ -78,7 +95,8 @@ int main() {
         cout << "\n1. Register Appliance\n";
         cout << "2. View Appliances\n";
         cout << "3. Calculate Total Energy\n";
-        cout << "4. Exit\n";
+        cout << "4. Calculate Billing\n";
+        cout << "5. Exit\n";
         cout << "Choice: ";
         cin >> choice;
 
@@ -95,13 +113,16 @@ int main() {
                  << " kWh\n";
             break;
         case 4:
+            calculateBilling();
+            break;
+        case 5:
             cout << "Goodbye\n";
             break;
         default:
             cout << "Invalid choice\n";
         }
 
-    } while (choice != 4);
+    } while (choice != 5);
 
     return 0;
 }
