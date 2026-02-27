@@ -1,3 +1,4 @@
+
 #include <iostream>
 using namespace std;
 
@@ -15,15 +16,28 @@ public:
     }
 
     void display() {
-        cout << "Appliance Name: " << name << endl;
-        cout << "Power Rating (W): " << powerRating << endl;
-        cout << "Usage Hours per Day: " << usageHours << endl;
+        cout << "\nAppliance Details\n";
+        cout << "Name: " << name << endl;
+        cout << "Power (W): " << powerRating << endl;
+        cout << "Hours/Day: " << usageHours << endl;
     }
 };
 
 int main() {
 
-    Appliance a1("Fan", 75, 5);
+    string name;
+    float power, hours;
+
+    cout << "Enter appliance name: ";
+    cin >> name;
+
+    cout << "Enter power rating (W): ";
+    cin >> power;
+
+    cout << "Enter usage hours per day: ";
+    cin >> hours;
+
+    Appliance a1(name, power, hours);
     a1.display();
 
     return 0;
